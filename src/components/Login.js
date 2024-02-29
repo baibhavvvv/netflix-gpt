@@ -3,7 +3,6 @@ import Header from './Header'
 import { checkvalidData } from '../utils/validate';
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from 'react-router-dom';
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
@@ -15,7 +14,6 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleButtonClick = () => {
@@ -40,7 +38,6 @@ const Login = () => {
             addUser({uid: uid,email: email,displayName: displayName,photoURL: photoURL,
           })    
           );
-      navigate("/browse");
     }).catch((error) => {
       setErrorMessage(error.message);
     });
@@ -58,7 +55,6 @@ const Login = () => {
         .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        console.log(user);
         })
         .catch((error) => {
         const errorCode = error.code;
@@ -85,7 +81,7 @@ const Login = () => {
       }} className="absolute w-3/12 bg-opacity-80 p-12 rounded-lg bg-black mx-auto right-0 left-0 text-white">
         <h1 className="font-bold text-3xl py-4">{isSignInForm ? "Sign In" : "Sign Up"}</h1>
         {!isSignInForm &&
-        <input type="text" placeholder="Full Name" 
+        <input ref={name} type="text" placeholder="Full Name" 
         className="p-4 my-4 w-full bg-gray-800" />}
         <input ref={email} type="text" placeholder="Email Address" 
         className="p-4 my-4 w-full bg-gray-800" />
