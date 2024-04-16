@@ -12,6 +12,12 @@ Created redux store with userslice
 Implemented sign out 
 Added photo profile and name 
 Update profile api
+Unsubscribed to onauth state changed callback
+Added hardcoded values to a constant file
+fixed bugs 
+registered tmdb api and got access token
+got data from nowplayingmovies api call
+
 
 
 
